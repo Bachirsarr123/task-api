@@ -33,11 +33,20 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!-- Dépendance vers task-core depuis Nexus -->
         <dependency>
             <groupId>sn.isi.l3gl.core</groupId>
             <artifactId>task-core</artifactId>
-            <version>0.3.1</version>
+            <version>0.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -51,6 +60,21 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <to>
+                        <image>bachirsarr123/task-api:latest</image>
+                    </to>
+                    <container>
+                        <ports>
+                            <port>8085</port>
+                        </ports>
+                    </container>
+                </configuration>
             </plugin>
         </plugins>
     </build>
