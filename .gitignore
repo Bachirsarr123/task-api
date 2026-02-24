@@ -1,0 +1,10 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+/static/
+/templates/
+/.idea/
+*.iws
+*.iml
+*.ipr
+.logs/
+.DS_Store
