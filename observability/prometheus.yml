@@ -1,0 +1,8 @@
+global:
+  scrape_interval: 10s
+
+scrape_configs:
+  - job_name: 'spring-boot-task-api'
+    metrics_path: '/l3gl/actuator/prometheus'
+    static_configs:
+      - targets: ['172.19.42.214:80']

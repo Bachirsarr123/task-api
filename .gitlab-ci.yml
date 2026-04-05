@@ -1,0 +1,39 @@
+image: maven:3.8.4-openjdk-17
+
+variables:
+  DOCKER_IMAGE: $DOCKER_USERNAME/task-api
+  DOCKER_DRIVER: overlay2
+
+stages:
+  - test
+  - build
+  - docker
+
+test:
+  stage: test
+  script:
+    - mvn test
+  only:
+    - develop
+
+build:
+  stage: build
+  script:
+    - mvn clean package -DskipTests
+  artifacts:
+    paths:
+      - target/*.jar
+  only:
+    - develop
+
+docker:
+  stage: docker
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  script:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker build -t $DOCKER_IMAGE:latest .
+    - docker push $DOCKER_IMAGE:latest
+  only:
+    - develop
